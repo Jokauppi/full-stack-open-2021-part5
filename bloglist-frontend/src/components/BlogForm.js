@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 
-const BlogForm = ({ user, blogs, setBlogs, blogService }) => {
+const BlogForm = ({ user, blogs, setBlogs, blogService, notify }) => {
   
-  const handleCreate = async () => {
+  const handleCreate = async event => {
+    event.preventDefault()
+
     try {
       const newBlog = await blogService.create(
         {
@@ -12,8 +14,17 @@ const BlogForm = ({ user, blogs, setBlogs, blogService }) => {
         },
         user
         )
+      
+      setTitle('')
+      setAuthor('')
+      setUrl('')
+
       setBlogs(blogs.concat(newBlog))
-    } catch (exception) { }
+      notify.success(`A new blog ${newBlog.title} by ${newBlog.author} added`)
+    } catch (exception) {
+      notify.failure(`Blog creation failed`)
+    }
+    
   }
   
   const [title, setTitle] = useState('')

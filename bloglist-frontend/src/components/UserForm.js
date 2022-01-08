@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const UserForm = ({user, setUser, loginService}) => {
+const UserForm = ({user, setUser, loginService, notify}) => {
   
   const handleLogin = async event => {
     event.preventDefault()
@@ -13,7 +13,9 @@ const UserForm = ({user, setUser, loginService}) => {
       setUsername('')
       setPassword('')
 
-    } catch (exception) { }
+    } catch (exception) {
+      notify.failure('Wrong username or password')
+    }
   }
 
   const handleLogout = () => {
@@ -38,7 +40,6 @@ const UserForm = ({user, setUser, loginService}) => {
   if (!user) {
     return (
         <div>
-          <h2>log in to application</h2>
           <form onSubmit={handleLogin}>
             <div>
               username <input type="text" name="Username" onChange={handleUsernameFieldChange} value={username} />
