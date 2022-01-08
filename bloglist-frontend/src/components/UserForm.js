@@ -55,7 +55,6 @@ const UserForm = ({user, setUser, loginService}) => {
   } else {
     return (
       <div>
-        <h2>blogs</h2>
         <div>{user.name} logged in <button onClick={handleLogout}>Logout</button>
         </div>
       </div>

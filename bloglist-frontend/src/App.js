@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import BlogList from './components/BlogList'
 import UserForm from './components/UserForm'
+import BlogList from './components/BlogList'
+import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -19,8 +20,11 @@ const App = () => {
 
   return (
     <div>
+      {user && <h1>blogs</h1>}
       <UserForm user={user} setUser={setUser} loginService={loginService} />
-      <br></br>
+      <br/>
+      {user && <BlogForm user={user} blogs={blogs} setBlogs={setBlogs} blogService={blogService} />}
+      <br/>
       {user && <BlogList blogs={blogs} />}
     </div>
   )
