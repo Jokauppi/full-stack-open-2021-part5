@@ -8,11 +8,14 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(undefined)
 
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }, [])
+  useEffect( () => {
+      const initializeBlogs = async () => {
+        const initialBlogs = await blogService.getAll()
+        setBlogs( initialBlogs )
+      }
+      initializeBlogs()
+    }, []
+  )
 
   return (
     <div>
