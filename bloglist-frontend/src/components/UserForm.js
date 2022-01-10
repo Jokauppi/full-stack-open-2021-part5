@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-const UserForm = ({user, setUser, loginService, notify}) => {
-  
+const UserForm = ({ user, setUser, loginService, notify }) => {
+
   const handleLogin = async event => {
     event.preventDefault()
 
@@ -35,25 +35,24 @@ const UserForm = ({user, setUser, loginService, notify}) => {
     if (initalUser) {
       setUser(initalUser)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (!user) {
     return (
-        <div>
-            <form onSubmit={handleLogin}>
-              <div>
+      <div>
+        <form onSubmit={handleLogin}>
+          <div>
                 username <input type="text" name="Username" onChange={handleUsernameFieldChange} value={username} />
-              </div>
-              <div>
+          </div>
+          <div>
                 password <input type="password" name="Password" onChange={handlePasswordFieldChange} value={password} />
-              </div>
-              <div>
-                <button type="submit">Login</button>
-              </div>
-            </form>
-        </div>
-      )
+          </div>
+          <div>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    )
   } else {
     return (
       <div>

@@ -38,7 +38,7 @@ const App = () => {
       blogFormRef.current.toggleVisibility()
       notify.success(`A new blog ${newBlog.title} by ${newBlog.author} added`)
     } catch (exception) {
-      notify.failure(`Blog creation failed`)
+      notify.failure('Blog creation failed')
     }
   }
 
@@ -57,7 +57,7 @@ const App = () => {
 
       setBlogs(blogs.map(b => (b.id === likedBlog.id ? likedBlog : b)))
     } catch (exception) {
-      notify.failure(`Blog like failed`)
+      notify.failure('Blog like failed')
     }
 
   }
@@ -69,7 +69,7 @@ const App = () => {
         await blogService.remove(blog.id, user)
         setBlogs(blogs.filter(b => b.id !== blog.id))
       } catch (exception) {
-        notify.failure(`Blog deletion failed`)
+        notify.failure('Blog deletion failed')
       }
     }
 
