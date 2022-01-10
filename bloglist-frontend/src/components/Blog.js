@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-const Blog = ({ blog, likeBlog }) => {
+const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
   const [contentVisible, setContentVisible] = useState(false)
 
   const blogStyle = {
@@ -18,6 +18,10 @@ const Blog = ({ blog, likeBlog }) => {
 
   const handleLike = async () => {
     await likeBlog(blog)
+  }
+
+  const handleRemove = async () => {
+    await deleteBlog(blog)
   }
 
   return (
@@ -44,6 +48,9 @@ const Blog = ({ blog, likeBlog }) => {
             <div>{blog.url}</div>
             <div>{blog.likes} <button onClick={handleLike}>like</button></div>
             <div>{blog.user.name}</div>
+            {blog.user.username === user.username &&
+              <button onClick={handleRemove} style={{ width: '5em' }}>remove</button>
+            }
           </div>
         </div>
       }

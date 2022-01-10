@@ -43,7 +43,7 @@ const App = () => {
   }
 
   const likeBlog = async blog => {
-    
+
     const blogId = blog.id
     const newBlog = {
       user: blog.user.id,
@@ -54,12 +54,24 @@ const App = () => {
     }
     try {
       const likedBlog = await blogService.like(blogId, newBlog)
-      
+
       setBlogs(blogs.map(b => (b.id === likedBlog.id ? likedBlog : b)))
     } catch (exception) {
       notify.failure(`Blog like failed`)
     }
 
+  }
+
+  const deleteBlog = async blog => {
+    const confirm = window.confirm(`Remove blog ${blog.title} by ${blog.author}`)
+    if (confirm) {
+      try {
+        await blogService.remove(blog.id, user)
+        setBlogs(blogs.filter(b => b.id !== blog.id))
+      } catch (exception) {
+        notify.failure(`Blog deletion failed`)
+      }
+    }
 
   }
 
@@ -76,7 +88,7 @@ const App = () => {
         </Togglable>
       }
       <br />
-      {user && <BlogList blogs={blogs} likeBlog={likeBlog} />}
+      {user && <BlogList blogs={blogs} user={user} likeBlog={likeBlog} deleteBlog={deleteBlog} />}
     </div>
   )
 }
