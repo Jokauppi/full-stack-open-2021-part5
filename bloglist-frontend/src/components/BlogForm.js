@@ -1,32 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-const BlogForm = ({ user, blogs, setBlogs, blogService, notify }) => {
-  
-  const handleCreate = async event => {
-    event.preventDefault()
+const BlogForm = ({ createBlog }) => {
 
-    try {
-      const newBlog = await blogService.create(
-        {
-          title: title,
-          author: author,
-          url: url
-        },
-        user
-        )
-      
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-
-      setBlogs(blogs.concat(newBlog))
-      notify.success(`A new blog ${newBlog.title} by ${newBlog.author} added`)
-    } catch (exception) {
-      notify.failure(`Blog creation failed`)
-    }
-    
-  }
-  
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -34,11 +9,28 @@ const BlogForm = ({ user, blogs, setBlogs, blogService, notify }) => {
   const handleTitleFieldChange = event => setTitle(event.target.value)
   const handleAuthorFieldChange = event => setAuthor(event.target.value)
   const handleUrlFieldChange = event => setUrl(event.target.value)
-  
+
+  const addBlog = async event => {
+    event.preventDefault()
+
+    createBlog(
+      {
+        title: title,
+        author: author,
+        url: url
+      }
+    )
+
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+
+  }
+
   return (
     <div>
       <h2>Create new blog</h2>
-      <form onSubmit={handleCreate}>
+      <form onSubmit={addBlog}>
         <div>
           title <input type="text" name="Title" onChange={handleTitleFieldChange} value={title} />
         </div>
