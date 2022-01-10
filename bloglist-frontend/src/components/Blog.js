@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-const Blog = ({blog}) => {
+const Blog = ({ blog, likeBlog }) => {
   const [contentVisible, setContentVisible] = useState(false)
 
   const blogStyle = {
@@ -16,6 +16,10 @@ const Blog = ({blog}) => {
     setContentVisible(!contentVisible)
   }
 
+  const handleLike = async () => {
+    await likeBlog(blog)
+  }
+
   return (
     <div style={blogStyle}>
       <div onClick={toggleVisibility} style={
@@ -27,9 +31,9 @@ const Blog = ({blog}) => {
       }>
         {blog.title} | {blog.author} <button>{contentVisible ? 'Hide' : 'Show'}</button>
       </div>
-      {contentVisible && 
+      {contentVisible &&
         <div>
-          <hr/>
+          <hr />
           <div style={
             {
               display: 'flex',
@@ -38,12 +42,13 @@ const Blog = ({blog}) => {
             }
           }>
             <div>{blog.url}</div>
-            <div>{blog.likes} <button>like</button></div>
+            <div>{blog.likes} <button onClick={handleLike}>like</button></div>
             <div>{blog.user.name}</div>
           </div>
         </div>
       }
-    </div>  
-)}
+    </div>
+  )
+}
 
 export default Blog

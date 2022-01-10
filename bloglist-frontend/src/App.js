@@ -33,7 +33,6 @@ const App = () => {
   const createBlog = async blog => {
     try {
       const newBlog = await blogService.create(blog, user)
-      newBlog.user = user
 
       setBlogs(blogs.concat(newBlog))
       blogFormRef.current.toggleVisibility()
@@ -41,6 +40,27 @@ const App = () => {
     } catch (exception) {
       notify.failure(`Blog creation failed`)
     }
+  }
+
+  const likeBlog = async blog => {
+    
+    const blogId = blog.id
+    const newBlog = {
+      user: blog.user.id,
+      likes: blog.likes + 1,
+      author: blog.author,
+      title: blog.title,
+      url: blog.url
+    }
+    try {
+      const likedBlog = await blogService.like(blogId, newBlog)
+      
+      setBlogs(blogs.map(b => (b.id === likedBlog.id ? likedBlog : b)))
+    } catch (exception) {
+      notify.failure(`Blog like failed`)
+    }
+
+
   }
 
   return (
@@ -52,11 +72,11 @@ const App = () => {
       <br />
       {user &&
         <Togglable showLabel="Add a new blog" ref={blogFormRef}>
-          <BlogForm user={user} blogs={blogs} setBlogs={setBlogs} blogService={blogService} createBlog={createBlog} notify={notify} />
+          <BlogForm createBlog={createBlog} />
         </Togglable>
       }
       <br />
-      {user && <BlogList blogs={blogs} />}
+      {user && <BlogList blogs={blogs} likeBlog={likeBlog} />}
     </div>
   )
 }
