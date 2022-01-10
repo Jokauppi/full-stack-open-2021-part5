@@ -33,6 +33,7 @@ const App = () => {
   const createBlog = async blog => {
     try {
       const newBlog = await blogService.create(blog, user)
+      newBlog.user = user
 
       setBlogs(blogs.concat(newBlog))
       blogFormRef.current.toggleVisibility()

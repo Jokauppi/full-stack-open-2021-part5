@@ -25,7 +25,7 @@ const Blog = ({blog}) => {
           columnGap: 10
         }
       }>
-        {blog.title} <button>{contentVisible ? 'Hide' : 'Show'}</button>
+        {blog.title} | {blog.author} <button>{contentVisible ? 'Hide' : 'Show'}</button>
       </div>
       {contentVisible && 
         <div>
@@ -39,7 +39,7 @@ const Blog = ({blog}) => {
           }>
             <div>{blog.url}</div>
             <div>{blog.likes} <button>like</button></div>
-            <div>{blog.author}</div>
+            <div>{blog.user.name}</div>
           </div>
         </div>
       }
