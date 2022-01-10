@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 const UserForm = ({user, setUser, loginService, notify}) => {
   
@@ -61,6 +62,13 @@ const UserForm = ({user, setUser, loginService, notify}) => {
       </div>
     )
   }
+}
+
+UserForm.propTypes = {
+  user: PropTypes.object,
+  setUser: PropTypes.func.isRequired,
+  loginService: PropTypes.object.isRequired,
+  notify: PropTypes.object.isRequired
 }
 
 export default UserForm
