@@ -1,10 +1,10 @@
 import React, { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 
-const Togglable = React.forwardRef(( { showLabel, hideLabel, initialVisibility, children }, ref ) => {
-  if(!initialVisibility) initialVisibility = false
-  if(!hideLabel) initialVisibility = 'Cancel'
-  const [ visible, setVisible ] = useState(initialVisibility)
+const Togglable = React.forwardRef(({ showLabel, hideLabel, initialVisibility, children }, ref) => {
+  if (!initialVisibility) initialVisibility = false
+  if (!hideLabel) hideLabel = 'Cancel'
+  const [visible, setVisible] = useState(initialVisibility)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
   const showWhenVisible = { display: visible ? '' : 'none' }
