@@ -27,7 +27,7 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div className='blog' style={blogStyle}>
       <div onClick={toggleVisibility} style={
         {
           display: 'flex',
@@ -47,11 +47,11 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
               rowGap: 5
             }
           }>
-            <div>{blog.url}</div>
-            <div>{blog.likes} <button onClick={handleLike}>like</button></div>
+            <div className='url'>{blog.url}</div>
+            <div className='likes'>{blog.likes} <button onClick={handleLike}>Like</button></div>
             <div>{blog.user.name}</div>
             {blog.user.username === user.username &&
-              <button onClick={handleRemove} style={{ width: '5em' }}>remove</button>
+              <button onClick={handleRemove} style={{ width: '5em' }}>Remove</button>
             }
           </div>
         </div>
