@@ -42,10 +42,10 @@ const UserForm = ({ user, setUser, loginService, notify }) => {
       <div>
         <form onSubmit={handleLogin}>
           <div>
-                username <input type="text" name="Username" onChange={handleUsernameFieldChange} value={username} />
+                username <input id="username" type="text" name="Username" onChange={handleUsernameFieldChange} value={username} />
           </div>
           <div>
-                password <input type="password" name="Password" onChange={handlePasswordFieldChange} value={password} />
+                password <input id="password" type="password" name="Password" onChange={handlePasswordFieldChange} value={password} />
           </div>
           <div>
             <button type="submit">Login</button>
@@ -56,7 +56,7 @@ const UserForm = ({ user, setUser, loginService, notify }) => {
   } else {
     return (
       <div>
-        <div>logged in as {user.name} <button onClick={handleLogout}>Logout</button>
+        <div>Logged in as {user.name} <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
     )
