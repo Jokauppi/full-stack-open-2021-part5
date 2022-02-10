@@ -73,6 +73,13 @@ describe('Blog app', function () {
         cy.get('@blog1').contains('Like').parent().should('contain', '1')
       })
 
+      it('A blog can be removed', function() {
+        cy.contains('blog1 | author1').parent().as('blog1')
+        cy.get('@blog1').contains('Show').click()
+        cy.get('@blog1').contains('Remove').click()
+        cy.should('not.contain', 'blog1 | author1')
+      })
+
     })
 
   })
