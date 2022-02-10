@@ -80,6 +80,26 @@ describe('Blog app', function () {
         cy.should('not.contain', 'blog1 | author1')
       })
 
+      it('Blogs are sorted by likes', function() {
+        cy.contains('Add a new blog').click()
+
+        cy.get('#title-field').type('blog2')
+        cy.get('#author-field').type('author2')
+        cy.get('#url-field').type('blog2.com')
+        cy.get('#create-button').click()
+
+        cy.contains('blog2 | author2').parent().as('blog2')
+        cy.get('@blog2').contains('Show').click()
+        cy.get('@blog2').contains('Like').click()
+
+        cy.contains('blog1 | author1').contains('Show').click()
+
+        cy.get('.likes').then(likes => {
+          cy.wrap(likes[0]).contains('1')
+          cy.wrap(likes[1]).contains('0')
+        })
+      })
+
     })
 
   })
