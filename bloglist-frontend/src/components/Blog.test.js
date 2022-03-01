@@ -1,97 +1,94 @@
-import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
-import { render, fireEvent } from '@testing-library/react'
-import Blog from './Blog'
+import React from "react";
+import "@testing-library/jest-dom/extend-expect";
+import { render, fireEvent } from "@testing-library/react";
+import Blog from "./Blog";
 
-describe('blog box', () => {
-
-  test('by default renders title and author but not url or likes', () => {
+describe("blog box", () => {
+  test("by default renders title and author but not url or likes", () => {
     const blog = {
-      title: 'example',
-      author: 'exampler',
-      url: 'example.com',
+      title: "example",
+      author: "exampler",
+      url: "example.com",
       likes: 2,
       user: {
-        name: 'user name',
-        username: 'username'
-      }
-    }
+        name: "user name",
+        username: "username",
+      },
+    };
 
     const component = render(
-      <Blog blog={blog} user={{}} likeBlog={() => {}} deleteBlog={() => {}}/>
-    )
+      <Blog blog={blog} user={{}} likeBlog={() => {}} deleteBlog={() => {}} />
+    );
 
-    const container = component.container
+    const container = component.container;
 
-    expect(container).toHaveTextContent(
-      'example | exampler'
-    )
+    expect(container).toHaveTextContent("example | exampler");
 
-    const urlElement = container.querySelector('.url')
-    expect(urlElement).toBeFalsy()
+    const urlElement = container.querySelector(".url");
+    expect(urlElement).toBeFalsy();
 
-    const likesElement = container.querySelector('.likes')
-    expect(likesElement).toBeFalsy()
+    const likesElement = container.querySelector(".likes");
+    expect(likesElement).toBeFalsy();
+  });
 
-  })
-
-  test('also renders url and likes after show clicked', () => {
+  test("also renders url and likes after show clicked", () => {
     const blog = {
-      title: 'example',
-      author: 'exampler',
-      url: 'example.com',
+      title: "example",
+      author: "exampler",
+      url: "example.com",
       likes: 2,
       user: {
-        name: 'user name',
-        username: 'username'
-      }
-    }
+        name: "user name",
+        username: "username",
+      },
+    };
 
     const component = render(
-      <Blog blog={blog} user={{}} likeBlog={() => {}} deleteBlog={() => {}}/>
-    )
+      <Blog blog={blog} user={{}} likeBlog={() => {}} deleteBlog={() => {}} />
+    );
 
-    const container = component.container
+    const container = component.container;
 
-    const show = component.getByText('Show')
-    fireEvent.click(show)
+    const show = component.getByText("Show");
+    fireEvent.click(show);
 
-    const urlElement = container.querySelector('.url')
-    expect(urlElement).toBeDefined()
+    const urlElement = container.querySelector(".url");
+    expect(urlElement).toBeDefined();
 
-    const likesElement = container.querySelector('.likes')
-    expect(likesElement).toBeDefined()
+    const likesElement = container.querySelector(".likes");
+    expect(likesElement).toBeDefined();
+  });
 
-  })
-
-  test('also renders url and likes after show clicked', () => {
+  test("also renders url and likes after show clicked", () => {
     const blog = {
-      title: 'example',
-      author: 'exampler',
-      url: 'example.com',
+      title: "example",
+      author: "exampler",
+      url: "example.com",
       likes: 2,
       user: {
-        name: 'user name',
-        username: 'username'
-      }
-    }
+        name: "user name",
+        username: "username",
+      },
+    };
 
-    const likeHandler = jest.fn()
+    const likeHandler = jest.fn();
 
     const component = render(
-      <Blog blog={blog} user={{}} likeBlog={likeHandler} deleteBlog={() => {}}/>
-    )
+      <Blog
+        blog={blog}
+        user={{}}
+        likeBlog={likeHandler}
+        deleteBlog={() => {}}
+      />
+    );
 
-    const show = component.getByText('Show')
-    fireEvent.click(show)
+    const show = component.getByText("Show");
+    fireEvent.click(show);
 
-    const like = component.getByText('Like')
-    fireEvent.click(like)
-    fireEvent.click(like)
+    const like = component.getByText("Like");
+    fireEvent.click(like);
+    fireEvent.click(like);
 
-    expect(likeHandler).toHaveBeenCalledTimes(2)
-
-  })
-
-})
-
+    expect(likeHandler).toHaveBeenCalledTimes(2);
+  });
+});

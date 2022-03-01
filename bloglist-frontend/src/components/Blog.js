@@ -1,70 +1,76 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
-  const [contentVisible, setContentVisible] = useState(false)
+  const [contentVisible, setContentVisible] = useState(false);
 
   const blogStyle = {
     padding: 10,
-    border: 'solid',
+    border: "solid",
     borderWidth: 1,
     marginBottom: 5,
-    width: 'fit-content',
-    minWidth: '20em',
-    borderRadius: 5
-  }
+    width: "fit-content",
+    minWidth: "20em",
+    borderRadius: 5,
+  };
 
   const toggleVisibility = () => {
-    setContentVisible(!contentVisible)
-  }
+    setContentVisible(!contentVisible);
+  };
 
   const handleLike = async () => {
-    await likeBlog(blog)
-  }
+    await likeBlog(blog);
+  };
 
   const handleRemove = async () => {
-    await deleteBlog(blog)
-  }
+    await deleteBlog(blog);
+  };
 
   return (
-    <div className='blog' style={blogStyle}>
-      <div onClick={toggleVisibility} style={
-        {
-          display: 'flex',
-          justifyContent: 'space-between',
-          columnGap: 10
-        }
-      }>
-        {blog.title} | {blog.author} <button>{contentVisible ? 'Hide' : 'Show'}</button>
+    <div className="blog" style={blogStyle}>
+      <div
+        onClick={toggleVisibility}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          columnGap: 10,
+        }}
+      >
+        {blog.title} | {blog.author}{" "}
+        <button>{contentVisible ? "Hide" : "Show"}</button>
       </div>
-      {contentVisible &&
+      {contentVisible && (
         <div>
           <hr />
-          <div style={
-            {
-              display: 'flex',
-              flexDirection: 'column',
-              rowGap: 5
-            }
-          }>
-            <div className='url'>{blog.url}</div>
-            <div className='likes'>{blog.likes} <button onClick={handleLike}>Like</button></div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              rowGap: 5,
+            }}
+          >
+            <div className="url">{blog.url}</div>
+            <div className="likes">
+              {blog.likes} <button onClick={handleLike}>Like</button>
+            </div>
             <div>{blog.user.name}</div>
-            {blog.user.username === user.username &&
-              <button onClick={handleRemove} style={{ width: '5em' }}>Remove</button>
-            }
+            {blog.user.username === user.username && (
+              <button onClick={handleRemove} style={{ width: "5em" }}>
+                Remove
+              </button>
+            )}
           </div>
         </div>
-      }
+      )}
     </div>
-  )
-}
+  );
+};
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   likeBlog: PropTypes.func.isRequired,
-  deleteBlog: PropTypes.func.isRequired
-}
+  deleteBlog: PropTypes.func.isRequired,
+};
 
-export default Blog
+export default Blog;
