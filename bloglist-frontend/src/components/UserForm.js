@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { Button, Form, Container, Row, Col, FloatingLabel, Stack } from "react-bootstrap";
 
 const UserForm = ({ user, setUser, loginService, notify }) => {
   const handleLogin = async (event) => {
@@ -38,41 +39,53 @@ const UserForm = ({ user, setUser, loginService, notify }) => {
   if (!user) {
     return (
       <div>
-        <form onSubmit={handleLogin}>
-          <div>
-            username{" "}
-            <input
-              id="username"
-              type="text"
-              name="Username"
-              onChange={handleUsernameFieldChange}
-              value={username}
-            />
-          </div>
-          <div>
-            password{" "}
-            <input
-              id="password"
-              type="password"
-              name="Password"
-              onChange={handlePasswordFieldChange}
-              value={password}
-            />
-          </div>
-          <div>
-            <button type="submit">Login</button>
-          </div>
-        </form>
+        <h2>log in to application</h2>
+        <Form onSubmit={handleLogin}>
+          <Stack gap={2}>
+            <Form.Group>
+              <FloatingLabel label="Username">
+                <Form.Control
+                  id="username"
+                  type="text"
+                  name="Username"
+                  onChange={handleUsernameFieldChange}
+                  value={username}
+                  placeholder="Username"
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group>
+              <FloatingLabel label="Password">
+                <Form.Control
+                  id="password"
+                  type="password"
+                  name="Password"
+                  onChange={handlePasswordFieldChange}
+                  value={password}
+                  placeholder="Password"
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Button type="submit">Login</Button>
+          </Stack>
+        </Form>
       </div>
     );
   } else {
     return (
-      <div>
-        <div>
-          Logged in as {user.name}{" "}
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      </div>
+      <Container>
+        <Row className="align-items-center">
+          <Col>
+            <h1>blogs</h1>
+          </Col>
+          <Col md="auto">
+            <div>
+              Logged in as {user.name}{" "}
+              <Button variant="secondary" onClick={handleLogout}>Logout</Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 };

@@ -74,8 +74,7 @@ const App = () => {
   };
 
   return (
-    <div>
-      {user ? <h1>blogs</h1> : <h2>log in to application</h2>}
+    <div className="container">
       <Notification
         message={successNotification}
         setNotification={setSuccessNotification}
@@ -92,7 +91,6 @@ const App = () => {
         loginService={loginService}
         notify={notify}
       />
-      <br />
       {user && (
         <Togglable showLabel="Add a new blog" ref={blogFormRef}>
           <BlogForm createBlog={createBlog} />

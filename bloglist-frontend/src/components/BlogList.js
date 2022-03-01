@@ -1,22 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Blog from "./Blog";
+import { Table } from "react-bootstrap";
 
 const BlogList = ({ blogs, user, likeBlog, deleteBlog }) => {
   return (
-    <div>
-      {blogs
-        .sort((a, b) => (a.likes <= b.likes ? 1 : -1))
-        .map((blog) => (
-          <Blog
-            key={blog.id}
-            blog={blog}
-            user={user}
-            likeBlog={likeBlog}
-            deleteBlog={deleteBlog}
-          />
-        ))}
-    </div>
+    <Table striped>
+      <tbody>
+        {blogs
+          .sort((a, b) => (a.likes <= b.likes ? 1 : -1))
+          .map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              user={user}
+              likeBlog={likeBlog}
+              deleteBlog={deleteBlog}
+            />
+          ))}
+      </tbody>
+    </Table>
   );
 };
 

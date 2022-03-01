@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Button, Form, FloatingLabel, Stack } from "react-bootstrap";
 
 const BlogForm = ({ createBlog }) => {
   const [title, setTitle] = useState("");
@@ -27,43 +28,47 @@ const BlogForm = ({ createBlog }) => {
   return (
     <div>
       <h2>Create new blog</h2>
-      <form onSubmit={addBlog}>
-        <div>
-          title{" "}
-          <input
-            id="title-field"
-            type="text"
-            name="Title"
-            onChange={handleTitleFieldChange}
-            value={title}
-          />
-        </div>
-        <div>
-          author{" "}
-          <input
-            id="author-field"
-            type="text"
-            name="Author"
-            onChange={handleAuthorFieldChange}
-            value={author}
-          />
-        </div>
-        <div>
-          url{" "}
-          <input
-            id="url-field"
-            type="text"
-            name="Url"
-            onChange={handleUrlFieldChange}
-            value={url}
-          />
-        </div>
-        <div>
-          <button id="create-button" type="submit">
-            Create
-          </button>
-        </div>
-      </form>
+      <Form onSubmit={addBlog}>
+        <Stack gap={2}>
+          <Form.Group>
+            <FloatingLabel label="Title">
+              <Form.Control
+                id="title-field"
+                type="text"
+                name="Title"
+                onChange={handleTitleFieldChange}
+                value={title}
+                placeholder="title"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group>
+            <FloatingLabel label="Author">
+              <Form.Control
+                id="author-field"
+                type="text"
+                name="Author"
+                onChange={handleAuthorFieldChange}
+                value={author}
+                placeholder="author"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Form.Group> 
+            <FloatingLabel label="Url">
+              <Form.Control
+                id="url-field"
+                type="text"
+                name="Url"
+                onChange={handleUrlFieldChange}
+                value={url}
+                placeholder="url"
+              />
+            </FloatingLabel>
+          </Form.Group>
+          <Button id="create-button" type="submit">Create</Button>
+        </Stack>
+      </Form>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useImperativeHandle } from "react";
 import PropTypes from "prop-types";
+import { Button, Stack } from "react-bootstrap";
 
 const Togglable = React.forwardRef(
   ({ showLabel, hideLabel, initialVisibility, children }, ref) => {
@@ -23,11 +24,15 @@ const Togglable = React.forwardRef(
     return (
       <div>
         <div style={hideWhenVisible}>
-          <button onClick={toggleVisibility}>{showLabel}</button>
+          <Button onClick={toggleVisibility}>{showLabel}</Button>
         </div>
         <div style={showWhenVisible}>
-          {children}
-          <button onClick={toggleVisibility}>{hideLabel}</button>
+          <Stack gap={2}>
+            <div>
+              {children}
+            </div>
+            <Button variant="outline-primary" onClick={toggleVisibility}>{hideLabel}</Button>
+          </Stack>
         </div>
       </div>
     );

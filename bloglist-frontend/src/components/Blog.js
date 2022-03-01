@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Button, Container, Row, Col, Stack } from "react-bootstrap";
+
 
 const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
   const [contentVisible, setContentVisible] = useState(false);
-
-  const blogStyle = {
-    padding: 10,
-    border: "solid",
-    borderWidth: 1,
-    marginBottom: 5,
-    width: "fit-content",
-    minWidth: "20em",
-    borderRadius: 5,
-  };
 
   const toggleVisibility = () => {
     setContentVisible(!contentVisible);
@@ -27,42 +19,36 @@ const Blog = ({ blog, user, likeBlog, deleteBlog }) => {
   };
 
   return (
-    <div className="blog" style={blogStyle}>
-      <div
-        onClick={toggleVisibility}
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          columnGap: 10,
-        }}
-      >
-        {blog.title} | {blog.author}{" "}
-        <button>{contentVisible ? "Hide" : "Show"}</button>
-      </div>
-      {contentVisible && (
-        <div>
-          <hr />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              rowGap: 5,
-            }}
-          >
-            <div className="url">{blog.url}</div>
-            <div className="likes">
-              {blog.likes} <button onClick={handleLike}>Like</button>
-            </div>
-            <div>{blog.user.name}</div>
-            {blog.user.username === user.username && (
-              <button onClick={handleRemove} style={{ width: "5em" }}>
-                Remove
-              </button>
+    <tr className="blog">
+      <Container >
+        <Row className="align-items-center">
+          <Col>
+            {blog.title}
+            {contentVisible && (
+              <Stack gap={2}>
+                <div className="url">{blog.url}</div>
+                <div>{blog.user.name}</div>
+                <Stack direction="horizontal" gap={2} className="likes">
+                  {blog.likes}
+                  <Button variant="success" onClick={handleLike}>Like</Button>
+                </Stack>
+                {blog.user.username === user.username && (
+                  <Button variant="danger" onClick={handleRemove}>
+                    Remove
+                  </Button>
+                )}
+              </Stack>
             )}
-          </div>
-        </div>
-      )}
-    </div>
+          </Col>
+          <Col>
+            {blog.author}
+          </Col>
+          <Col md="auto">
+            <Button variant="secondary" onClick={toggleVisibility}>{contentVisible ? "Hide" : "Show"}</Button>
+          </Col>
+        </Row>
+      </Container>
+    </tr>
   );
 };
 
